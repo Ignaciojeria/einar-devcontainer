@@ -26,6 +26,10 @@ get_golangci_lint_version() {
   golangci-lint --version 2>/dev/null | cut -d' ' -f4 || echo -n "n/a" && return 0
 }
 
+get_einar_version() {
+  einar --version 2>/dev/null | cut -d' ' -f4 || echo -n "n/a" && return 0
+}
+
 get_goreleaser_version() {
   goreleaser --version 2>/dev/null | head -1 | cut -d' ' -f3 || echo -n "n/a" && return 0
 }
@@ -118,6 +122,7 @@ if [ "${1-x}" == "--check-all-versions" ]; then
     print_version "Goplay" "haya14busa" "goplay" "$(get_goplay_version)"
     print_version "Gomodifytags" "fatih" "gomodifytags" "$(get_gomodifytags_version)"
     print_version "Gotests" "cweill" "gotests" "$(get_gotests_version)"
+    print_version "Einar" "ignaciojeria" "einar" "$(get_einar_version)"
 
     echo
     echo "CI tools"

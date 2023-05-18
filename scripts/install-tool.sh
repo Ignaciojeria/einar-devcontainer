@@ -27,6 +27,19 @@ case $1 in
     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v${GOLANGCI_LINT_VERSION}
     ;;
 
+  "einar")
+    EINAR_VERSION="$2"
+    cd ~
+    git clone https://github.com/Ignaciojeria/einar-cli.git
+    cd einar-cli
+    go build -o einar
+    mv einar ${GOBIN}/einar
+    chmod +x ${GOBIN}/einar
+    cd ~
+    rm -rf einar-cli
+    echo ${EINAR_VERSION} > ~/.einar
+    ;;
+    
   "goreleaser")
     GORELEASER_VERSION="$2"
     go install github.com/goreleaser/goreleaser@v${GORELEASER_VERSION}
