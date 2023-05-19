@@ -27,18 +27,21 @@ case $1 in
     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v${GOLANGCI_LINT_VERSION}
     ;;
 
-  "einar")
+"einar")
     EINAR_VERSION="$2"
     cd ~
     git clone https://github.com/Ignaciojeria/einar-cli.git
     cd einar-cli
     go build -o einar
     mv einar ${GOBIN}/einar
+    cp -r ./app ${GOBIN}/  # This line copies the /app folder directly into ${GOBIN}
     chmod +x ${GOBIN}/einar
+    chmod -R +x ${GOBIN}/app  # This line adds execute permissions to the /app folder and its contents in ${GOBIN}
     cd ~
     rm -rf einar-cli
     echo ${EINAR_VERSION} > ~/.einar
     ;;
+
     
   "goreleaser")
     GORELEASER_VERSION="$2"
